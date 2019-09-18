@@ -1,0 +1,23 @@
+{
+  "name": "mansiondesubastas",
+  "version": "1.0.0",
+  "description": "MansionDeSubastas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gautur16/MansionDeSubastas.git"
+  },
+  "author": "Benni og Gautur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gautur16/MansionDeSubastas/issues"
+  },
+  "homepage": "https://github.com/gautur16/MansionDeSubastas#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1"
+  }
+}
