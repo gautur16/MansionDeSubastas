@@ -36,16 +36,16 @@ app.get('/api/artists', function(req, res){
   });
 });
 
-app.get('/api/artists:id', function(req, res){
-  const artistId = req.params.artistsId;
-  artistService.getArtistById(artistId, function(artists){
-    return res.json(artists);
+app.get('/api/artists:artistid', function(req, res){
+  const artistId = req.params.artistId;
+  artistService.getArtistById(artistId, function(artist){
+    return res.json(artist);
   });
 });
 
 app.post('/api/artists', function(req, res){
-  artistService.createArtist(req.body, function(artists){
-    return res.status(201).json(artists);
+  artistService.createArtist(req.body, function(artist){
+    return res.status(201).json(artist);
   }, function(err){
     return res.status(400).json(err);
   });
