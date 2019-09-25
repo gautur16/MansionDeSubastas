@@ -12,7 +12,7 @@ const artService = () => {
         Art.findById(id, function(err, art){
           if(err) {throw new Error(err); }
           cb(art);
-        })
+        });
     };
 
     const createArt = (art, cb, errorCb) => {

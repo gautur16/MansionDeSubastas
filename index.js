@@ -23,10 +23,29 @@ app.get('/api/arts/:artId', function(req, res){
 });
 
 app.post('/api/arts', function(req, res){
-  var today = Date.now();
-  console.log(today.toTimeString());
   artService.createArt(req.body, function(art){
     return res.status(201).json(art);
+  }, function(err){
+    return res.status(400).json(err);
+  });
+});
+
+app.get('/api/artists', function(req, res){
+  artistService.getAllArtists(function(artists){
+    return res.json(artists);
+  });
+});
+
+app.get('/api/artists:id', function(req, res){
+  const artistId = req.params.artistsId;
+  artistService.getArtistById(artistId, function(artists){
+    return res.json(artists);
+  });
+});
+
+app.post('/api/artists', function(req, res){
+  artistService.createArtist(req.body, function(artists){
+    return res.status(201).json(artists);
   }, function(err){
     return res.status(400).json(err);
   });

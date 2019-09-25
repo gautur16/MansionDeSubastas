@@ -1,14 +1,26 @@
 const artistService = () => {
     const getAllArtists = (cb, errorCb) => {
-        // Your implementation goes here
+        Artist.find({}, function(err, artists){
+            if(err) {throw new Error(err); }
+            cb(artists);
+        });
     };
 
     const getArtistById = (id, cb, errorCb) => {
-        // Your implementation goes here
+        Artist.findById(id, function(err, artist){
+            if(err) {throw new Error(err); }
+            cb(artist);
+        });
     };
 
     const createArtist = (artist, cb, errorCb) => {
-        // Your implementation goes here
+        if(Artist.findById(art.artistId, function(err, artist){
+        }) !== null){
+          Artist.create(artist, function(err, result){
+            if(err){ errorCb(err); }
+            else {cb(result);}
+          });
+        }
     };
 
     return {
