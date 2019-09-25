@@ -1,3 +1,4 @@
+const Artist = require('../data/db').Artist;
 const artistService = () => {
     const getAllArtists = (cb, errorCb) => {
         Artist.find({}, function(err, artists){

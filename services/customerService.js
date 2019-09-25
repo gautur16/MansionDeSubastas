@@ -1,10 +1,17 @@
+const Costumer = require('../data/db').Costumer;
 const customerService = () => {
     const getAllCustomers = (cb, errorCb) => {
-        // Your implementation goes here
+        Costumer.find({}, function(err, costumers){
+            if(err) {throw new Error(err); }
+            cb(costumers);
+          });
     };
 
     const getCustomerById = (id, cb, errorCb) => {
-        // Your implementation goes here
+        Costumer.findById(id, function(err, costumer){
+            if(err) {throw new Error(err); }
+            cb(costumer);
+          });
     };
 
     const getCustomerAuctionBids = (customerId, cb, errorCb) => {
