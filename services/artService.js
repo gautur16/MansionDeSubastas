@@ -10,7 +10,7 @@ const artService = () => {
 
     const getArtById = (id, cb, errorCb) => {
         Art.findById(id, function(err, art){
-          if(err) {throw new Error(err); }
+          if(err) { return 0; }
           cb(art);
         });
     };
@@ -19,7 +19,7 @@ const artService = () => {
         if(Artist.findById(art.artistId, function(err, artist){
         }) !== null){
           Art.create(art, function(err, result){
-            if(err){ errorCb(err); }
+            if(err){ console.log(err); }
             else {cb(result);}
           });
         }

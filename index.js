@@ -98,6 +98,17 @@ app.get('/api/auctions/:auctionId', function(req, res){
   });
 });
 
+app.post('/api/auctions', function(req, res){
+  if(req.minimumPrice === null){
+    req.minimumPrice = 1000;
+  }
+  auctionService.createAuction(req.body, function(auction){
+    return res.status(201).json(auction);
+  }, function(err){
+    return res.status(400).json(err);
+  });
+});
+
 
 
 // http://localhost:3000/api/ufos [GET]

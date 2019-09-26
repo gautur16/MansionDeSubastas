@@ -22,12 +22,19 @@ const auctionService = () => {
 
 	const createAuction = (auction, cb, errorCb) => {
     if(Art.findById(auction.artId, function(err, auction){
-    }) !== null){
-      Art.create(art, function(err, result){
+    }) === null){ errorCb(err); }
+    if(Art.findById(auction.artId, function(err, art){
+    }).isAuctionItem === false){
+      //throw 412
+      throw new Error(err);
+    }
+    if(Auction.find({artId : auction.artId}, function(err, auction){
+      if(auction){return auction.status(409).json(err);}
+    }) !== null){}
+      Auction.create(auction, function(err, result){
         if(err){ errorCb(err); }
         else {cb(result);}
       });
-    }
     };
 
 	const getAuctionBidsWithinAuction = (auctionId, cb, errorCb) => {
