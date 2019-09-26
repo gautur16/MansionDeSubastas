@@ -1,25 +1,32 @@
-const Costumer = require('../data/db').Costumer;
+const Customer = require('../data/db').Customer;
+const AuctionBid = require('../data/db').AuctionBid;
 const customerService = () => {
     const getAllCustomers = (cb, errorCb) => {
-        Costumer.find({}, function(err, costumers){
+        Customer.find({}, function(err, customers){
             if(err) {throw new Error(err); }
-            cb(costumers);
+            cb(customers);
           });
     };
 
     const getCustomerById = (id, cb, errorCb) => {
-        Costumer.findById(id, function(err, costumer){
-            if(err) {throw new Error(err); }
-            cb(costumer);
+        Customer.findById(id, function(err, customer){
+            if(err) {errorCb(err); }
+            cb(customer);
           });
     };
 
     const getCustomerAuctionBids = (customerId, cb, errorCb) => {
-        // Your implementation goes here
+      AuctionBid.find({customerId : customerId}, function(err, auctionBids){
+          if(err) {errorCb(err);; }
+          cb(auctionBids);
+        });
     };
 
 	const createCustomer = (customer, cb, errorCb) => {
-        // Your implementation goes here
+      Customer.create(customer, function(err, result){
+        if(err){ errorCb(err); }
+        else {cb(result);}
+      });
     };
 
     return {

@@ -23,6 +23,7 @@ app.get('/api/arts/:artId', function(req, res){
 });
 
 app.post('/api/arts', function(req, res){
+  req.body.date = new Date();
   artService.createArt(req.body, function(art){
     return res.status(201).json(art);
   }, function(err){
@@ -36,7 +37,7 @@ app.get('/api/artists', function(req, res){
   });
 });
 
-app.get('/api/artists:artistid', function(req, res){
+app.get('/api/artists/:artistId', function(req, res){
   const artistId = req.params.artistId;
   artistService.getArtistById(artistId, function(artist){
     return res.json(artist);
@@ -44,10 +45,56 @@ app.get('/api/artists:artistid', function(req, res){
 });
 
 app.post('/api/artists', function(req, res){
+  req.body.memberSince = new Date();
   artistService.createArtist(req.body, function(artist){
     return res.status(201).json(artist);
   }, function(err){
     return res.status(400).json(err);
+  });
+});
+
+
+app.get('/api/customers', function(req, res){
+  customerService.getAllCustomers(function(customers){
+    return res.json(customers);
+  });
+});
+
+
+app.get('/api/customers/:customerId', function(req, res){
+  const customerId = req.params.customerId;
+  customerService.getCustomerById(customerId, function(customer){
+    return res.json(customer);
+  });
+});
+
+app.post('/api/customers', function(req, res){
+  customerService.createCustomer(req.body, function(customer){
+    return res.status(201).json(customer);
+  }, function(err){
+    return res.status(400).json(err);
+  });
+});
+
+
+app.get('/api/customers/:customerId/auction-bids', function(req, res){
+  const customerId = req.params.customerId;
+  customerService.getCustomerAuctionBids(customerId, function(auctionBid){
+    return res.json(auctionBid);
+  });
+});
+
+
+app.get('/api/auctions', function(req, res){
+  auctionService.getAllAuctions(function(auctions){
+    return res.json(auctions);
+  });
+});
+
+app.get('/api/auctions/:auctionId', function(req, res){
+  const auctionId = req.params.auctionId;
+  auctionService.getAuctionById(auctionId, function(auction){
+    return res.json(auction);
   });
 });
 

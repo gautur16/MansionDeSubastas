@@ -15,13 +15,10 @@ const artistService = () => {
     };
 
     const createArtist = (artist, cb, errorCb) => {
-        if(Artist.findById(art.artistId, function(err, artist){
-        }) !== null){
-          Artist.create(artist, function(err, result){
-            if(err){ errorCb(err); }
-            else {cb(result);}
-          });
-        }
+      Artist.create(artist, function(err, result){
+        if(err){ errorCb(err); }
+        else {cb(result);}
+      });
     };
 
     return {

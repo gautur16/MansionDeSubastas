@@ -1,10 +1,19 @@
+const Auction = require('../data/db').Auction;
+const Art = require('../data/db').Art;
+
 const auctionService = () => {
     const getAllAuctions = (cb, errorCb) => {
-        // Your implementation goes here
+      Auction.find({}, function(err, auctions){
+          if(err) {throw new Error(err); }
+          cb(auctions);
+      });
     };
 
     const getAuctionById = (id, cb, errorCb) => {
-        // Your implementation goes here
+      Auction.findById(id, function(err, auction){
+          if(err) {throw new Error(err); }
+          cb(auction);
+      });
     };
 
     const getAuctionWinner = (auctionId, cb, errorCb) => {
@@ -12,7 +21,13 @@ const auctionService = () => {
     };
 
 	const createAuction = (auction, cb, errorCb) => {
-        // Your implementation goes here
+    if(Art.findById(auction.artId, function(err, auction){
+    }) !== null){
+      Art.create(art, function(err, result){
+        if(err){ errorCb(err); }
+        else {cb(result);}
+      });
+    }
     };
 
 	const getAuctionBidsWithinAuction = (auctionId, cb, errorCb) => {
