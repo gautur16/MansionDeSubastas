@@ -21,20 +21,33 @@ const auctionService = () => {
     };
 
 	const createAuction = (auction, cb, errorCb) => {
-    if(Art.findById(auction.artId, function(err, auction){
-    }) === null){ errorCb(err); }
-    if(Art.findById(auction.artId, function(err, art){
-    }).isAuctionItem === false){
-      //throw 412
-      throw new Error(err);
+    Art.findById(auction.artId, function(err, art){
+      if(auction !== null && art.isAuctionItem === true) {
+        Auction.create(auction, function(err, result){
+          if(err){ errorCb(err); }
+          else {cb(result);}
+          //Checka hvort auction er til fyrir artId
+      });
+      }
+    });
+    errorCb({status: 412, body: "Precondition failed"});
+    errorCb({status: 409, body: "Conflict"});
+    /*if(Art.findById(auction.artId, function(err, auction){ }) === null) { 
+      errorCb(err); 
+    }
+    if(Art.findById(auction.artId, function(err, art){}).isAuctionItem === false)
+    { 
+      return { status: 412, body: "Precondition failed" } 
+    }
+    {
     }
     if(Auction.find({artId : auction.artId}, function(err, auction){
-      if(auction){return auction.status(409).json(err);}
+      if(auction){return { status: 409, body: "Conflict" } }
     }) !== null){}
-      Auction.create(auction, function(err, result){
+    Auction.create(auction, function(err, result){
         if(err){ errorCb(err); }
         else {cb(result);}
-      });
+      });*/
     };
 
 	const getAuctionBidsWithinAuction = (auctionId, cb, errorCb) => {

@@ -105,7 +105,7 @@ app.post('/api/auctions', function(req, res){
   auctionService.createAuction(req.body, function(auction){
     return res.status(201).json(auction);
   }, function(err){
-    return res.status(400).json(err);
+    return res.status(err.status).json(err.body);
   });
 });
 
